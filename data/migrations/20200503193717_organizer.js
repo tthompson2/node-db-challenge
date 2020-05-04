@@ -26,10 +26,26 @@ exports.up = async function (knex) {
             .onUpdate("CASCADE")
     })
 
+    await knex.schema.createTable("project_resource", (table) => {
+
+        table.integer("resource_id")
+           .references("id")
+           .inTable("resource")
+           .onDelete("CASCADE")
+           .onUpdate("CASCADE")
+        table.integer("project_id")
+           .references("id")
+           .inTable("project")
+           .onDelete("CASCADE")
+           .onUpdate("CASCADE")
+        table.primary(["zoo_id," , "animal_id"])
+    })
+
 };
 
 exports.down = async function (knex) {
 
+    await knex.schema.dropTableIfExists("project_resource")
     await knex.schema.dropTableIfExists("task")
     await knex.schema.dropTableIfExists("project")
     await knex.schema.dropTableIfExists("resource")

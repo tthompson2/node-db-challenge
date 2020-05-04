@@ -5,10 +5,10 @@ const router = express.Router()
 
 router.get("/", async (req, res, next) => {
 	try {
-		const animals = await db("resource")
+		const resource = await db("resource")
 			.select("*")
 
-		res.json(animals)
+		res.json(resource)
 	} catch(err) {
 		next(err)
 	}
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
 	try {
-		const animal = await db("resource")
+		const resource = await db("resource")
 			.where("id", req.params.id)
 			.first()
 
@@ -26,10 +26,24 @@ router.get("/:id", async (req, res, next) => {
 			})
 		}
 
-		res.json(animal)
+		res.json(resource)
 	} catch(err) {
 		next(err)
 	}
 })
+
+router.post("/", async (req, res, next) => {
+    try {
+
+        const [id] = await db("resource").insert(req.body)
+        const resource = await db("resource").where({id}).first()
+
+        res.status(201).json(resource)
+
+    } catch(err){
+        next(err)
+    }
+})
+
 
 module.exports = router
