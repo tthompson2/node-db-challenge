@@ -8,6 +8,9 @@ const db = require("./data/config");
 
 const server = express();
 
+
+server.use(express.json());
+
 server.use("/task", taskRouter)
 server.use("/resource", resourceRouter)
 server.use("/project", projectRouter)
