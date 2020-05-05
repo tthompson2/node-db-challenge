@@ -20,9 +20,9 @@ router.get("/:id", async (req, res, next) => {
 			.where("id", req.params.id)
 			.first()
 
-		if (!animal) {
+		if (!resource) {
 			return res.status(404).json({
-				message: "Animal not found",
+				message: "Resource not found",
 			})
 		}
 

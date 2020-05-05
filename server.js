@@ -6,11 +6,10 @@ const taskRouter = require("./routers/task-router")
 
 const db = require("./data/config");
 
-
 const server = express();
 
-server.use("/task", resourceRouter)
-server.use("/project", taskRouter)
-server.use("/resource", projectRouter)
+server.use("/task", taskRouter)
+server.use("/resource", resourceRouter)
+server.use("/project", projectRouter)
 
 module.exports = server;

@@ -22,7 +22,7 @@ router.get("/:id", async (req, res, next) => {
 
 		if (!project) {
 			return res.status(404).json({
-				message: "Animal not found",
+				message: "Project not found",
 			})
 		}
 
